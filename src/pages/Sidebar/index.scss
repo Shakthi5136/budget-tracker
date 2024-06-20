@@ -1,0 +1,193 @@
+.nav-bar {
+  background: var(--primary-color);
+  width: 300px;
+  height: 100%;
+  flex: auto;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+  .user-info {
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    color: var(--white);
+    
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+    
+    p {
+      margin: 10px 0;
+      font-size: 14px;
+      color: var(--secondary-color);
+    }
+  }
+
+  nav {
+    text-align: center;
+    width: 100%;
+
+    a {
+      position: relative;
+      font-size: 22px;
+      color: var(--secondary-color);
+      display: block;
+      line-height: 51px;
+      height: 51px;
+      text-decoration: none;
+      transition: all 0.3s ease-out;
+    
+      &:hover {
+        color: var(--bg-color);
+        
+    
+        &:after {
+          opacity: 1;
+          bottom: -20px; /* Adjust this value to vertically center the text */
+        }
+      }
+    
+      &:after {
+        content: attr(data-content); /* Use attribute to store content */
+        font-size: 15px;
+        letter-spacing: 2px;
+        position: absolute;
+        bottom: -100%; /* Move off screen initially */
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Center horizontally */
+        text-align: center;
+        opacity: 0;
+        transition: all 0.3s ease-out;
+      }
+    
+      &:first-child:after {
+        content: 'HOME';
+      }
+    
+      &.expense-link:after {
+        content: 'EXPENSE';
+      }
+    
+      &.budget-link:after {
+        content: 'BUDGET';
+      }
+    
+      &.income-link:after {
+        content: 'INCOME';
+      }
+    
+      &.active {
+        color:white;
+        
+        svg {
+          color: var(--white);
+        }
+      }
+    }
+  }
+
+  .logout {
+    text-align: center;
+    padding: 20px;
+    background: var(--primary-color);
+
+    a {
+      font-size: 22px;
+      color: var(--secondary-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+
+      &:hover {
+        color: var(--bg-color);
+      }
+    }
+  }
+
+  .hamburger-icon,
+  .close-icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .nav-bar {
+      background: transparent;
+      position: initial;
+      height: auto;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      .user-info {
+        position: relative;
+        background: none;
+        color: var(--secondary-color);
+        text-align: center;
+        padding: 20px 0;
+        margin-bottom: 20px;
+      }
+
+      nav {
+        display: none;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: var(--primary-color);
+        height: 100%;
+        margin: 0;
+        z-index: 2;
+        position: fixed;
+
+        &.mobile-show {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          &:after {
+            opacity: 1;
+            position: initial;
+            width: auto;
+            margin-left: 10px;
+          }
+
+          svg {
+            opacity: 1 !important;
+          }
+        }
+      }
+
+      .logout {
+        background: none;
+
+        a {
+          color: var(--secondary-color);
+        }
+      }
+
+      .hamburger-icon,
+      .close-icon {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        display: block;
+        z-index: 1;
+      }
+    }
+  }
+}

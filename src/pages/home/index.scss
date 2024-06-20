@@ -1,0 +1,187 @@
+@import "~react-calendar/dist/Calendar.css";
+
+.container-homepage {
+  margin-left: 300px;
+
+  p {
+    margin-left: 60px;
+    font-size: 60px;
+  }
+
+  .balance {
+    left: 100px;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    //margin: auto; /* Center the balance div */
+    margin-bottom: 20px;
+    position: relative; 
+    display: flex;
+    align-items: left;
+    justify-content:space-evenly; 
+
+    h1 {
+      font-size: 30px;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  .slide-wrapper {
+    left: 10px;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    //margin: auto; /* Center the slide container */
+    display: flex;
+    align-items: center;
+
+    .scroll-arrow {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 30px; /* Adjust arrow size */
+      z-index: 1; /* Ensure arrows are above cards */
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      &.left {
+        margin-right: 10px; /* Adjust margin to position near slide components */
+      }
+
+      &.right {
+        margin-left: 10px; /* Adjust margin to position near slide components */
+      }
+    }
+  }
+
+  .slide-container {
+    display: flex;
+    overflow: hidden; /* Hide the overflow to show only 3 slides */
+    width: calc(100%); /* Ensure full width availability minus arrows */
+    position: relative;
+
+    .slide-component {
+      flex: 0 0 calc(100% / 3.4  ); /* Ensure 3 components per view */
+      margin: 0 5px; /* Adjust margin between slide components */
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #f0f0f0; /* Example background color */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+input {
+    width: 80px;
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      background-color: var(--primary-color);
+    }
+  }
+      p {
+        margin: 10px 0 0 0; /* Margin for the text above the icon */
+        font-size: 16px; /* Adjusted font size */
+      }
+
+      svg {
+        margin-top: 10px; /* Margin for the icon below the text */
+      }
+    }
+    input {
+      width: 80px;
+      padding: 5px;
+      margin-top: 10px;
+      font-size: 16px;
+      text-align: center;
+    }
+  
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+  
+      &:hover {
+        background-color: var(--primary-color);
+      }
+    }
+  }
+
+  .calendar-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+
+    .react-calendar {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      font-family: 'mukta', sans-serif;
+
+      .react-calendar__navigation {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+
+      .react-calendar__navigation__arrow {
+        color: var(--primary-color);
+      }
+
+      .react-calendar__month-view__days__day--weekend {
+        color: red;
+      }
+
+      .react-calendar__tile {
+        color: white;
+      }
+
+      .react-calendar__tile--active {
+        background-color: white;
+        color: var(--secondary-color);
+      }
+
+      .react-calendar__tile--now {
+        color: white;
+        background-color: var(--secondary-color);
+      }
+
+      .react-calendar__tile:hover {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+    }
+  }
+}

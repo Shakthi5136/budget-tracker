@@ -1,0 +1,18 @@
+:root {
+  --primary-color: #232323;
+  --secondary-color: #5c91a8;
+  --tag-color: #6C5F5B;
+  --bg-color: #ffffff;
+}
+
+@font-face {
+  font-family: 'mukta';
+  src: url('../src/assets/font/mukta.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: 'mukta', sans-serif; /* Apply mukta font to the entire body */
+}
