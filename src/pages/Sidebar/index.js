@@ -27,7 +27,7 @@ const Sidebar = () => {
       localStorage.setItem('userId', userId);
       const fetchUserData = async () => {
         try {
-          const response = await fetch(`http://localhost:3001/api/user/${userId}`);
+          const response = await fetch(`http://localhost:3002/api/user/${userId}`);
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }

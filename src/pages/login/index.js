@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Fixed import statement
+import {jwtDecode} from 'jwt-decode';
 import './index.scss';
 import logo from '../../assets/logo.png';
 
@@ -14,7 +14,7 @@ const LoginPage = () => {
 
   const storeUserData = async (userData) => {
     try {
-      const response = await fetch('http://localhost:3001/api/user', {
+      const response = await fetch('http://localhost:3002/api/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,11 +47,11 @@ const LoginPage = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     const userData = {
-      id: email, // Using email as the id for simplicity
+      id: email,
       name: username,
       email: email,
       password: password,
-      picture: '', // No picture for normal signup
+      picture: '',
     };
     localStorage.setItem('userId', email);
     await storeUserData(userData);
@@ -61,7 +61,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/api/login', {
+      const response = await fetch('http://localhost:3002/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -128,6 +128,12 @@ const LoginPage = () => {
           />
           <button onClick={() => setIsLogin(!isLogin)} className="btn switch-btn">
             {isLogin ? 'Create an Account' : 'Already have an account? Log in'}
+          </button>
+          <button onClick={() => navigate('/admin/login')} className="btn admin-login-btn">
+            Admin Login
+          </button>
+          <button onClick={() => navigate('/admin/signup')} className="btn admin-login-btn">
+            Admin Signup
           </button>
         </div>
       </div>

@@ -17,7 +17,7 @@ const Income = () => {
 
       // Send balance to the backend
       try {
-        const response = await fetch('http://localhost:3001/api/balance', {
+        const response = await fetch('http://localhost:3002/api/balance', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

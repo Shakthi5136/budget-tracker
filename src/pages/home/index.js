@@ -62,7 +62,7 @@ const HomePage = () => {
     const fetchBalance = async () => {
       setIsLoadingBalance(true); // Set loading state while fetching balance
       try {
-        const response = await fetch(`http://localhost:3001/api/balance/${userId}`);
+        const response = await fetch(`http://localhost:3002/api/balance/${userId}`);
         const data = await response.json();
         setBalance(data.balance || 0);
       } catch (error) {
@@ -107,7 +107,7 @@ const HomePage = () => {
     setIsLoadingUpdate(true); // Set loading state while updating budget
     try {
       console.log('Sending update budget request:', { userId, category, newBudget });
-      const response = await fetch('http://localhost:3001/api/budget', {
+      const response = await fetch('http://localhost:3002/api/budget', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
