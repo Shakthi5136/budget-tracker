@@ -65,12 +65,102 @@ db.serialize(() => {
     FOREIGN KEY(family_member_id) REFERENCES family_members(id)
   )`);
 
+  db.run(`CREATE TABLE IF NOT EXISTS budget (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id TEXT NOT NULL,
+    category TEXT NOT NULL,
+    amount REAL NOT NULL,
+    date TEXT NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES user(id)
+  )`);
+
   
 });
 const dbAll = util.promisify(db.all).bind(db);
 const dbRun = util.promisify(db.run).bind(db);
 
 const dbGet = util.promisify(db.get).bind(db);
+
+// Endpoint to create or update a budget
+// Endpoint to create or update a budget
+app.put('/api/budget', async (req, res) => {
+  console.log('Received PUT request:', req.body);
+  const { userId, category, newBudget: amount } = req.body;
+
+  // Validate request body
+  if (!userId || !category || amount == null) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
+  try {
+    // Check if budget already exists for the user and category
+    const existingBudget = await dbGet('SELECT * FROM budget WHERE user_id = ? AND category = ?', [userId, category]);
+
+    if (existingBudget) {
+      // Update existing budget
+      
+      await dbRun('UPDATE budget SET amount = ? WHERE user_id = ? AND category = ?', [amount, userId, category]);
+      console.log('Budget updated:', { userId, category, amount });
+      res.status(200).json({ message: 'Budget updated' });
+    } else {
+      // Insert new budget
+      await dbRun('INSERT INTO budget (user_id, category, amount, date) VALUES (?, ?, ?, ?)', [userId, category, amount, new Date().toISOString()]);
+      console.log('Budget updated:', { userId, category, amount });
+      res.status(201).json({ message: 'Budget created' });
+    }
+  } catch (err) {
+    console.error('Error handling budget:', err);
+    res.status(500).json({ error: 'Failed to handle budget' });
+  }
+});
+
+
+
+// Endpoint to get budgets for a user
+// Endpoint to get budgets for a user
+app.get('/api/budget/:userId', async (req, res) => {
+  console.log('Request received at /api/budget', req.body);
+  const { userId } = req.params;
+
+  try {
+    const budgets = await new Promise((resolve, reject) => {
+      db.all('SELECT * FROM budget WHERE user_id = ?', [userId], (err, rows) => {
+        if (err) {
+          console.error('Database error:', err);
+          reject(err);
+        } else {
+          console.log('Fetched budgets from DB:', rows);
+          resolve(rows);
+        }
+      });
+    });
+    res.status(200).json(budgets);
+  } catch (err) {
+    console.error('Error fetching budgets:', err);
+    res.status(500).json({ error: 'Failed to fetch budgets' });
+  }
+});
+
+
+// Endpoint to delete a budget
+app.delete('/api/budget/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await new Promise((resolve, reject) => {
+      db.run('DELETE FROM budget WHERE id = ?', [id], (err) => {
+        if (err) reject(err);
+        resolve();
+      });
+    });
+    res.status(200).json({ message: 'Budget deleted' });
+  } catch (err) {
+    console.error('Error deleting budget:', err);
+    res.status(500).json({ error: 'Failed to delete budget' });
+  }
+});
+
+
 
 // Endpoint to get spending by family member
 app.get('/api/spending_by_family_member/:userId', async (req, res) => {

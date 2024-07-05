@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Loader from 'react-loaders'
+import Loader from 'react-loaders';
 import { faChevronLeft, faChevronRight, faPlane, faHammer, faGamepad, faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
 import RecentTransactions from './RecentTransactions';
 import FamilySpendingPieChart from './FamilySpending/FamilySpendingChart';
@@ -21,6 +21,7 @@ const SlideComponent = ({ icon, title, budget, userId, category, onUpdateBudget 
   const handleSave = async () => {
     setIsLoading(true); // Set loading state when saving
     await onUpdateBudget(userId, category, newBudget);
+
     setIsEditing(false);
     setIsLoading(false); // Reset loading state after update
   };
@@ -39,7 +40,7 @@ const SlideComponent = ({ icon, title, budget, userId, category, onUpdateBudget 
           onChange={handleChange}
         />
       ) : (
-        <p className='amount'>${budget.toFixed(2)}</p>
+        <p className='amount'>${newBudget.toFixed(2)}</p>
       )}
       {isEditing ? (
         <button disabled={isLoading} onClick={handleSave}>
@@ -187,26 +188,19 @@ const HomePage = () => {
         <div className='scroll-arrow right' onClick={scrollRightHandler}>
           <FontAwesomeIcon icon={faChevronRight} />
         </div>
-        
-        
       </div>
 
       <div className='container-recent-transactions'>
-        
         <RecentTransactions />
-        </div>
-        <div className='container-pie-chart'>
-        
+      </div>
+      <div className='container-pie-chart'>
         <FamilySpendingPieChart userId={userId} />
-        </div>
-
-        <div className='container-tip-component'>
-        
+      </div>
+      <div className='container-tip-component'>
         <TipComponent />
-        </div>
-      <Loader type="cube-transition"/>
+      </div>
+      <Loader type="cube-transition" />
     </div>
-    
   );
 };
 
