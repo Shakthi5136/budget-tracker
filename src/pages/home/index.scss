@@ -1,8 +1,102 @@
-@import "~react-calendar/dist/Calendar.css";
-
 .container-homepage {
+  min-height: 100vh; /* Ensure full viewport height */
+  position: relative;
   margin-left: 300px;
   padding: 20px;
+  overflow-x: hidden; /* Hide horizontal overflow */
+
+  .container-tip-component{
+    background-color: var(--primary-color);
+    color: var(--secondary-colors);
+    position: fixed;
+    font-size: 16px;
+    width: 900px; 
+    height: 150px;
+    left: 300px;
+    bottom: 20px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .tip-component{
+      .p{
+          font-size: 12px;
+      }
+  
+  }
+  }
+  .container-pie-chart {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    margin: 20px;
+    padding: 20px;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    canvas {
+      max-width: 400px;
+      max-height: 400px;
+    }
+  }
+
+  .container-recent-transactions {
+    position: fixed;
+    max-height: 400px;
+    right: 20px;
+    bottom: 20px;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .expense {
+      color: red;
+    }
+
+    .income {
+      color: green;
+    }
+  }
+
+  /* Your existing styles continue... */
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f4f4f4;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
 
   p {
     margin-left: 60px;
@@ -18,7 +112,7 @@
     margin-bottom: 20px;
     position: relative;
     display: flex;
-    align-items: flex-start; /* Adjust alignment */
+    align-items: flex-start;
     justify-content: space-evenly;
 
     h1 {
@@ -36,7 +130,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Adjust alignment */
+    justify-content: space-between;
 
     .scroll-arrow {
       background-color: rgba(255, 255, 255, 0.8);
@@ -63,19 +157,20 @@
 
   .slide-container {
     display: flex;
-    overflow: hidden;
+    overflow-x: hidden; /* Allow horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrolling */
     width: 100%;
     position: relative;
 
     .slide-component {
-      flex: 0 0 calc(100% / 3); /* Adjust width for three components */
+      flex: 0 0 calc(100% / 3);
       margin: 0 5px;
       padding: 10px;
       border-radius: 10px;
       background-color: #f0f0f0;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
-
+      
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -111,54 +206,6 @@
 
       svg {
         margin-top: 10px;
-      }
-    }
-  }
-
-  .calendar-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    overflow: hidden;
-
-    .react-calendar {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      font-family: 'mukta', sans-serif;
-
-      .react-calendar__navigation {
-        background-color: var(--secondary-color);
-        color: white;
-      }
-
-      .react-calendar__navigation__arrow {
-        color: var(--primary-color);
-      }
-
-      .react-calendar__month-view__days__day--weekend {
-        color: red;
-      }
-
-      .react-calendar__tile {
-        color: white;
-      }
-
-      .react-calendar__tile--active {
-        background-color: white;
-        color: var(--secondary-color);
-      }
-
-      .react-calendar__tile--now {
-        color: white;
-        background-color: var(--secondary-color);
-      }
-
-      .react-calendar__tile:hover {
-        background-color: var(--secondary-color);
-        color: white;
       }
     }
   }

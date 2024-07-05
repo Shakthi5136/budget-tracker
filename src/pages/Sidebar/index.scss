@@ -2,7 +2,6 @@
   background: var(--primary-color);
   width: 300px;
   height: 100%;
-  flex: auto;
   position: absolute;
   top: 0;
   z-index: 3;
@@ -10,19 +9,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
+
   .user-info {
     font-weight: bold;
     text-align: center;
     padding: 20px;
     color: var(--white);
-    
+
     img {
       width: 80px;
       height: 80px;
       border-radius: 50%;
     }
-    
+
     p {
       margin: 10px 0;
       font-size: 14px;
@@ -43,17 +42,16 @@
       height: 51px;
       text-decoration: none;
       transition: all 0.3s ease-out;
-    
+
       &:hover {
         color: var(--bg-color);
-        
-    
+
         &:after {
           opacity: 1;
           bottom: -20px; /* Adjust this value to vertically center the text */
         }
       }
-    
+
       &:after {
         content: attr(data-content); /* Use attribute to store content */
         font-size: 15px;
@@ -66,28 +64,39 @@
         opacity: 0;
         transition: all 0.3s ease-out;
       }
-    
+
       &:first-child:after {
         content: 'HOME';
       }
-    
-      &.expense-link:after {
-        content: 'EXPENSE';
+     
+      &.transaction-link:after {
+        content: 'TRANSACTION';
       }
-    
+
+     
       &.budget-link:after {
         content: 'BUDGET';
       }
-    
+
       &.income-link:after {
         content: 'INCOME';
       }
-    
+
       &.active {
-        color:white;
-        
+        color: white;
+
         svg {
           color: var(--white);
+        }
+      }
+    }
+
+    .user-sub {
+      padding-left: 60px; /* Indent sublinks */
+      a {
+        font-size: 18px;
+        &:after {
+          content: ''; /* Ensure no extra content for this link */
         }
       }
     }
@@ -119,75 +128,73 @@
   }
 
   @media screen and (max-width: 1200px) {
-    .nav-bar {
-      background: transparent;
-      position: initial;
-      height: auto;
-      min-height: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      
-      .user-info {
-        position: relative;
-        background: none;
+    background: transparent;
+    position: initial;
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .user-info {
+      position: relative;
+      background: none;
+      color: var(--secondary-color);
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 20px;
+    }
+
+    nav {
+      display: none;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: var(--primary-color);
+      height: 100%;
+      margin: 0;
+      z-index: 2;
+      position: fixed;
+
+      &.mobile-show {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:after {
+          opacity: 1;
+          position: initial;
+          width: auto;
+          margin-left: 10px;
+        }
+
+        svg {
+          opacity: 1 !important;
+        }
+      }
+    }
+
+    .logout {
+      background: none;
+
+      a {
         color: var(--secondary-color);
-        text-align: center;
-        padding: 20px 0;
-        margin-bottom: 20px;
       }
+    }
 
-      nav {
-        display: none;
-        width: 100%;
-        top: 0;
-        left: 0;
-        background: var(--primary-color);
-        height: 100%;
-        margin: 0;
-        z-index: 2;
-        position: fixed;
-
-        &.mobile-show {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          &:after {
-            opacity: 1;
-            position: initial;
-            width: auto;
-            margin-left: 10px;
-          }
-
-          svg {
-            opacity: 1 !important;
-          }
-        }
-      }
-
-      .logout {
-        background: none;
-
-        a {
-          color: var(--secondary-color);
-        }
-      }
-
-      .hamburger-icon,
-      .close-icon {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        display: block;
-        z-index: 1;
-      }
+    .hamburger-icon,
+    .close-icon {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      display: block;
+      z-index: 1;
     }
   }
 }

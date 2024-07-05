@@ -1,0 +1,14 @@
+.container-add-user-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+
+    h1{
+        font-size: 60px;
+        color: black;
+    }
+  }
+  

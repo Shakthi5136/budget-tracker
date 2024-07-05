@@ -1,15 +1,14 @@
-.container-income-page {
+.container-transaction-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
   background-color: var(--bg-color);
-  color: white;
+  //color: #fff;
   min-height: 100vh;
 
   h1 {
     margin-bottom: 20px;
-    color: var(--secondary-color);
   }
 
   table {
@@ -17,7 +16,8 @@
     max-width: 1000px;
     border-collapse: collapse;
     margin-bottom: 20px;
-    color: white;
+    color: var(--text-color);
+    //color: white;
 
     th, td {
       border: 2px solid var(--primary-color);

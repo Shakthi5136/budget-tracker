@@ -1,0 +1,15 @@
+.tip-component{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    .tips{
+        color:var(--secondary-color); 
+        font-size: 40px;
+    }
+    .tip-button{
+        background-color: var(--button-color);
+       font-weight: bold;
+        color: var(--secondary-color);
+    }
+}

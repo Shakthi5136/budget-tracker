@@ -5,8 +5,8 @@ const AdminDashboardPage = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('adminToken'); // Remove JWT token on logout
-    navigate('/admin/login'); // Navigate to admin login page
+    localStorage.removeItem('adminToken'); // to remove JWT token on logout
+    navigate('/admin/login'); 
   };
 
   return (

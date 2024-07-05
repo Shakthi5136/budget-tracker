@@ -4,7 +4,12 @@ import { useLocation } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Loader from 'react-loaders'
 import { faChevronLeft, faChevronRight, faPlane, faHammer, faGamepad, faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
+import RecentTransactions from './RecentTransactions';
+import FamilySpendingPieChart from './FamilySpending/FamilySpendingChart';
+import TipComponent from '../TipComponent/TipComponent';
+import '../TipComponent/TipComponent.scss';
 
 const SlideComponent = ({ icon, title, budget, userId, category, onUpdateBudget }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -62,7 +67,7 @@ const HomePage = () => {
     const fetchBalance = async () => {
       setIsLoadingBalance(true); // Set loading state while fetching balance
       try {
-        const response = await fetch(`http://localhost:3002/api/balance/${userId}`);
+        const response = await fetch(`http://localhost:5000/api/balance/${userId}`);
         const data = await response.json();
         setBalance(data.balance || 0);
       } catch (error) {
@@ -107,7 +112,7 @@ const HomePage = () => {
     setIsLoadingUpdate(true); // Set loading state while updating budget
     try {
       console.log('Sending update budget request:', { userId, category, newBudget });
-      const response = await fetch('http://localhost:3002/api/budget', {
+      const response = await fetch('http://localhost:5000/api/budget', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +153,7 @@ const HomePage = () => {
           <SlideComponent
             icon={faPlane}
             title='Holiday trip'
-            budget={655.00}
+            budget={0}
             userId={userId}
             category='Holiday trip'
             onUpdateBudget={handleUpdateBudget}
@@ -156,7 +161,7 @@ const HomePage = () => {
           <SlideComponent
             icon={faHammer}
             title='Renovation'
-            budget={235.00}
+            budget={0}
             userId={userId}
             category='Renovation'
             onUpdateBudget={handleUpdateBudget}
@@ -164,7 +169,7 @@ const HomePage = () => {
           <SlideComponent
             icon={faGamepad}
             title='Xbox'
-            budget={854.00}
+            budget={0}
             userId={userId}
             category='Xbox'
             onUpdateBudget={handleUpdateBudget}
@@ -172,7 +177,7 @@ const HomePage = () => {
           <SlideComponent
             icon={faBirthdayCake}
             title='Birthday'
-            budget={495.00}
+            budget={0}
             userId={userId}
             category='Birthday'
             onUpdateBudget={handleUpdateBudget}
@@ -182,12 +187,26 @@ const HomePage = () => {
         <div className='scroll-arrow right' onClick={scrollRightHandler}>
           <FontAwesomeIcon icon={faChevronRight} />
         </div>
+        
+        
       </div>
 
-      <div className='calendar-container'>
-        <Calendar onChange={setDate} value={date} />
-      </div>
+      <div className='container-recent-transactions'>
+        
+        <RecentTransactions />
+        </div>
+        <div className='container-pie-chart'>
+        
+        <FamilySpendingPieChart userId={userId} />
+        </div>
+
+        <div className='container-tip-component'>
+        
+        <TipComponent />
+        </div>
+      <Loader type="cube-transition"/>
     </div>
+    
   );
 };
 

@@ -1,17 +1,18 @@
-import './index.scss';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
   faBars,
   faClose,
-  faBagShopping,
   faMoneyCheckDollar,
   faMoneyBillTransfer,
   faSignOutAlt,
+  faWallet,
+  faUsers,
 } from '@fortawesome/free-solid-svg-icons';
-import { NavLink } from 'react-router-dom';
+import './index.scss';
+import Loader from 'react-loaders';
 
 const Sidebar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -27,7 +28,7 @@ const Sidebar = () => {
       localStorage.setItem('userId', userId);
       const fetchUserData = async () => {
         try {
-          const response = await fetch(`http://localhost:3002/api/user/${userId}`);
+          const response = await fetch(`http://localhost:5000/api/user/${userId}`);
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
@@ -81,6 +82,15 @@ const Sidebar = () => {
         >
           <FontAwesomeIcon icon={faUser} color="var(--secondary-color)" />
         </NavLink>
+        <div className="user-sub">
+          <NavLink 
+            className="user-link"
+            to="/users"
+            onClick={() => setShowNav(false)}
+          >
+            ADD USER
+          </NavLink>
+        </div>
        
         <NavLink
           activeClassName="active"
@@ -91,23 +101,23 @@ const Sidebar = () => {
           <FontAwesomeIcon icon={faMoneyCheckDollar} color="var(--secondary-color)" />
         </NavLink>
 
-        <NavLink 
-          activeClassName="active"
-          className="expense-link"
-          to="/expense"
-          onClick={() => setShowNav(false)}
-        >
-          <FontAwesomeIcon icon={faBagShopping} color="var(--secondary-color)" />
-        </NavLink>  
-
         <NavLink
           activeClassName="active"
           className="budget-link"
           to="/budget"
           onClick={() => setShowNav(false)}
         >
-          <FontAwesomeIcon icon={faMoneyBillTransfer} color="var(--secondary-color)" />
+          <FontAwesomeIcon icon={faWallet} color="var(--secondary-color)" />
         </NavLink>
+
+        <NavLink 
+          activeClassName="active"
+          className="transaction-link"
+          to="/transaction"
+          onClick={() => setShowNav(false)}
+        >
+          <FontAwesomeIcon icon={faMoneyBillTransfer} color="var(--secondary-color)" />
+        </NavLink>  
 
         <FontAwesomeIcon 
           onClick={() => setShowNav(false)}
@@ -133,6 +143,7 @@ const Sidebar = () => {
         size="3x"
         className='hamburger-icon' 
       />
+       <Loader type="ball-spin-fade-loader" />
     </div>
   );
 };

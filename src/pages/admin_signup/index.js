@@ -20,7 +20,7 @@ const AdminSignupPage = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:3002/api/admin/signup', {
+      const response = await fetch('http://localhost:5000/api/admin/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

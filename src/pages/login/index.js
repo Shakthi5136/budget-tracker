@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 import './index.scss';
 import logo from '../../assets/logo.png';
-
+import Loader from 'react-loaders'
 const LoginPage = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -14,7 +14,8 @@ const LoginPage = () => {
 
   const storeUserData = async (userData) => {
     try {
-      const response = await fetch('http://localhost:3002/api/user', {
+      console.log('Storing user data:', userData); // Debugging statement
+      const response = await fetch('http://localhost:5000/api/user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,25 +25,33 @@ const LoginPage = () => {
       if (response.ok) {
         console.log('User data stored successfully');
       } else {
-        console.error('Error storing user data');
+        const errorText = await response.text();
+        console.error('Error storing user data:', errorText); // Detailed error logging
       }
     } catch (error) {
       console.error('Error storing user data', error);
     }
   };
-
+  
   const handleGoogleLoginSuccess = (credentialResponse) => {
-    const credentialResponseDecoded = jwtDecode(credentialResponse.credential);
-    const userData = {
-      id: credentialResponseDecoded.sub,
-      name: credentialResponseDecoded.name,
-      email: credentialResponseDecoded.email,
-      picture: credentialResponseDecoded.picture,
-    };
-    localStorage.setItem('userId', credentialResponseDecoded.sub);
-    storeUserData(userData);
-    navigate('/home', { state: { userId: credentialResponseDecoded.sub } });
+    try {
+      const credentialResponseDecoded = jwtDecode(credentialResponse.credential);
+      const userData = {
+        id: credentialResponseDecoded.sub,
+        name: credentialResponseDecoded.name,
+        email: credentialResponseDecoded.email,
+        picture: credentialResponseDecoded.picture,
+      };
+      console.log('Decoded user data:', userData); // Debugging statement
+      localStorage.setItem('userId', credentialResponseDecoded.sub);
+      storeUserData(userData);
+      navigate('/home', { state: { userId: credentialResponseDecoded.sub } });
+    } catch (error) {
+      console.error('Error decoding JWT:', error);
+    }
   };
+  
+  
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -61,7 +70,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3002/api/login', {
+      const response = await fetch('http://localhost:5000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -141,6 +150,7 @@ const LoginPage = () => {
         <h1>Welcome to Expense Ease</h1>
         <p>Login to Access Dashboard</p>
       </div>
+      <Loader type="ball-spin-fade-loader" />
     </div>
   );
 };
