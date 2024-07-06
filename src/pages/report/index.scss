@@ -1,0 +1,75 @@
+@import 'react-calendar/dist/Calendar.css';
+
+.App {
+  text-align: center;
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #28af7b;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: 'Lucida Calligraphy', sans-serif;
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  justify-content: right;
+}
+
+.transaction-details {
+  position: absolute;
+  top: 150px;
+  left: 500px;
+  width: 500px;
+  background-color: #f9f9f9;
+  padding: 30px;
+  line-height: 3.125em;
+  border-radius: 80px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  text-align: center;
+  padding-top: 25px;
+  color: rgb(49, 180, 141);
+}
+
+p {
+  font-size: 22px;
+}
+
+.react-calendar {
+  border-radius: 60px;
+  box-shadow: 0 4px 8px rgba(65, 155, 147, 0.432);
+  border: 1px solid;
+  width: 550px;
+  background: rgb(56, 139, 132);
+  border: 7px solid #080808;
+  font-family: 'Lucida Calligraphy', Helvetica, sans-serif;
+  line-height: 2.125em;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .transaction-details {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+  }
+}

@@ -14,6 +14,7 @@ import AdminLoginPage from './pages/admin_login';
 import AdminDashboard from './pages/admin_dashboard';
 import AdminSignupPage from './pages/admin_signup';
 import Transaction from './pages/transaction';
+import Report from './pages/report';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Adduser from './pages/home/AddUser';
@@ -34,6 +35,7 @@ function App() {
               <Route path="transaction" element={<Transaction />} />
               <Route path="income" element={<Income />} />
               <Route path="budget" element={<Budget />} />
+              <Route path="report" element={<Report />} />
             </Route>
           </Routes>
         </Router>
