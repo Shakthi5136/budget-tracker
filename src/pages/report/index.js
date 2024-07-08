@@ -37,8 +37,13 @@ const Report = () => {
   };
 
   const filterTransactionsByDate = (date) => {
-    const formattedDate = date.toISOString().split('T')[0]; // Format date to YYYY-MM-DD
-    console.log(`Selected date: ${formattedDate}`);
+    var mm = date.getMonth() + 1; // getMonth() is zero-based
+    var dd = date.getDate();
+    var formattedDate=[date.getFullYear(),
+      (mm>9 ? '' : '0') + mm,
+      (dd>9 ? '' : '0') + dd
+     ].join('-');
+     console.log('date::'+formattedDate);
     const filteredTransactions = allTransactions.filter(transaction => {
       const transactionDate = new Date(transaction.date).toISOString().split('T')[0];
       console.log(`Transaction date: ${transactionDate}`);
@@ -50,7 +55,7 @@ const Report = () => {
 
   return (
     <div className='App'>
-      <h1>Recent Transactions</h1>
+      <h1>Transaction Details</h1>
       <div className='calendar-container'>
         <Calendar
           onChange={setSelectedDate}

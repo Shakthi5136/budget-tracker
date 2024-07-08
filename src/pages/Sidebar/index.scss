@@ -82,6 +82,10 @@
         content: 'INCOME';
       }
 
+      &.report-link:after {
+        content: 'REPORT';
+      }
+
       &.active {
         color: white;
 

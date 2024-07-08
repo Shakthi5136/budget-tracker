@@ -13,7 +13,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import './index.scss';
 import Loader from 'react-loaders';
-import { faRainbow } from '@fortawesome/free-solid-svg-icons/faRainbow';
 
 const Sidebar = () => {
   const [showNav, setShowNav] = useState(false);
@@ -120,14 +119,14 @@ const Sidebar = () => {
           <FontAwesomeIcon icon={faMoneyBillTransfer} color="var(--secondary-color)" />
         </NavLink>  
 
-        <NavLink 
+        <NavLink
           activeClassName="active"
           className="report-link"
           to="/report"
           onClick={() => setShowNav(false)}
         >
-          <FontAwesomeIcon icon={faRainbow} color="var(--secondary-color)" />
-        </NavLink>  
+          <FontAwesomeIcon icon={faWallet} color="var(--secondary-color)" />
+        </NavLink>
 
         <FontAwesomeIcon 
           onClick={() => setShowNav(false)}
